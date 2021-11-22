@@ -15,14 +15,16 @@ int	main(void)
 	char  *s; 
 	s = get_next_line(f);
 	printf("|%s|",s);
-	// s = get_next_line(f);
-	// printf("|%s|",s);
-	// s = get_next_line(f);
-	// printf("|%s|",s);
-	// s = get_next_line(f);
-	// printf("|%s|",s);
-	// s = get_next_line(f);
-	// printf("|%s|",s);
+	 free(s);	s = get_next_line(f);
+	printf("|%s|",s);
+	 free(s);	s = get_next_line(f);
+	printf("|%s|",s);
+	 free(s);	s = get_next_line(f);
+	printf("|%s|",s);
+	 free(s);	s = get_next_line(f);
+	printf("|%s|",s);
+	//  system("leaks test");
+	 free(s);
 	close(f);
 	return 0;
 }

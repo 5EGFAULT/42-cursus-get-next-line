@@ -52,6 +52,8 @@ size_t	ft_strlen(const char *s)
 	i = 0;
 	while (s && s[i] && s[i] != '\n')
 		i++;
+	// if(s[i] == '\n')
+	// 	++i;
 	return (i);
 }
  char	*ft_strchr(const char *s, int c)

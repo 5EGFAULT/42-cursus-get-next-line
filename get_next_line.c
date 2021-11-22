@@ -21,6 +21,8 @@ char	*get_next_line(int fd)
 	char	*tmp;
 
 	buf = (char *)malloc(BUFFER_SIZE + 1);
+	if (buf == NULL)
+		return (NULL);
 	s = NULL;
 	len = read(fd, buf, BUFFER_SIZE);
 	while (len > 0)
@@ -32,11 +34,12 @@ char	*get_next_line(int fd)
 		if (!s)
 		{
 			free(tmp);
+			free(buf);
 			return (NULL);
 		}
+		free(tmp);
 		if (ft_strchr(buf, '\n'))
 			break ;
-			free(tmp);
 		len = read(fd, buf, BUFFER_SIZE);
 	}
 	free(buf);

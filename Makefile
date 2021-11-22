@@ -7,7 +7,7 @@ FLAGS		:= -Wall -Wextra -Werror
 
 
 all:
-	gcc $(FLAGS)  -fsanitize=leak   -D BUFFER_SIZE=42 main.c $(SRC) -I. -o test
+	gcc $(FLAGS) -g   -D BUFFER_SIZE=42 main.c $(SRC) -I. -o test
 #	gcc $(FLAGS) -fsanitize=address  -D BUFFER_SIZE=4 main.c $(SRC) -I. -o test
 	./test
 clean:
