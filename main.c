@@ -10,21 +10,25 @@ int	main(void)
 	// read(f, d, BUFFER_SIZE);
 	// printf("|{%s}|",d);
 	// printf("\n|{%d}|",d[1]);
-
 	printf("|%d|\n",BUFFER_SIZE);
 	char  *s; 
 	s = get_next_line(f);
-	printf("|%s|",s);
-	 free(s);	s = get_next_line(f);
-	printf("|%s|",s);
-	 free(s);	s = get_next_line(f);
-	printf("|%s|",s);
-	 free(s);	s = get_next_line(f);
-	printf("|%s|",s);
-	 free(s);	s = get_next_line(f);
-	printf("|%s|",s);
+	 printf("%s",s);
+	 free(s);	
+	 s = get_next_line(f);
+	 printf("%s",s);
+	 free(s);	
+	 s = get_next_line(f);
+	printf("%s",s);
+	 free(s);	
+	//  s = get_next_line(f);
+	//   printf("%s",s);
+
+	//  free(s);	s = get_next_line(f);
+	//  printf("%s",s);
 	//  system("leaks test");
-	 free(s);
+	//  free(s);
+	system("leaks test");
 	close(f);
 	return 0;
 }

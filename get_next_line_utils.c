@@ -12,8 +12,9 @@
 
 #include "get_next_line.h"
 #include <stdlib.h>
+#include <stdio.h>
 
-char	*ft_strjoin(char const *s1, char const *s2,int	len)
+char	*ft_strjoin(char *s1, char const *s2,int len)
 {
 	char	*s;
 	int		i;
@@ -26,22 +27,22 @@ char	*ft_strjoin(char const *s1, char const *s2,int	len)
 	s = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!s)
 		return (0);
-	if (!s1)
-	{
-		while (s2[++i] && s2[i] != '\n' && i < len)
-			s[i] = s2[i];
-		s[i] = s2[i];
-		if (s2[i])
-			s[i + 1] = '\0';
-		return (s);
-	}
-	while (s1[++j])
+	while (s1 && s1[++j])
 		s[j] = s1[j];
-	while (s2[++i] && s2[i] != '\n'  && i < len)
+	if (!s1)
+		j++;
+	while (s2[++i]  && len > i)
+	{
 		s[i + j] = s2[i];
-	s[i + j] = s2[i];
-	if (s2[i])
-			s[i + j + 1] = '\0';
+		if(s2[i] == '\n')
+		{
+			i++;
+			break ;
+		}
+	}
+	s[i + j] = '\0';
+	// printf("{%s}",s);
+	// printf("{{%s}}",s2);
 	return (s);
 }
 
@@ -50,13 +51,11 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s && s[i] && s[i] != '\n')
+	while (s && s[i])
 		i++;
-	// if(s[i] == '\n')
-	// 	++i;
 	return (i);
 }
- char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	int	i;
 
@@ -70,4 +69,28 @@ size_t	ft_strlen(const char *s)
 	if ((char) c == s[i])
 		return ((char *)(s + i));
 	return (NULL);
+}
+
+char	*ft_substr(char *s, size_t len)
+{
+	char	*res;
+	int		i;
+	int		start;
+
+	start = -1;
+	i = -1;
+	while (s[++start] && s[start] != '\n')
+		;
+	++start;
+	if (s && (size_t)start < ft_strlen(s))
+	{
+		res = (char *)malloc(len + 1);
+		if (!(res))
+			return (0);
+		while (s[++i + start] && (size_t) i + start < len)
+			res[i] = s[i + start];
+		res[i] = '\0';
+		return (res);
+	}
+	return (0);
 }

@@ -14,17 +14,16 @@
       "MIMode": "lldb"
     },
     {
-      "name": "C/C++ Runner: Debug Session",
+      "name": "(lldb) Launch",
       "type": "cppdbg",
       "request": "launch",
+      "program": "${workspaceFolder}/test",
       "args": [],
-      "stopAtEntry": true,
-      "cwd": "/Users/asouinia/Desktop/get-next-line",
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
       "environment": [],
-      "program": "/Users/asouinia/Desktop/get-next-line/build/Debug/outDebug",
-      "internalConsoleOptions": "openOnSessionStart",
-      "MIMode": "lldb",
-      "externalConsole": true
+      "externalConsole": false,
+      "MIMode": "lldb"
     }
   ]
 }
