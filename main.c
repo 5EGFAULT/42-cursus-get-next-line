@@ -15,19 +15,19 @@ int	main(void)
 	s = get_next_line(f);
 	 printf("%s",s);
 	 free(s);	
-	 s = get_next_line(f);
-	 printf("%s",s);
-	 free(s);	
-	 s = get_next_line(f);
-	printf("%s",s);
-	 free(s);	
+	//  s = get_next_line(f);
+	//  printf("%s",s);
+	//  free(s);	
+	//  s = get_next_line(f);
+	// printf("%s",s);
+	//  free(s);	
 	//  s = get_next_line(f);
 	//   printf("%s",s);
 
 	//   free(s);
 	 // system("leaks test");
 
-	system("leaks -q test");
+	//system("leaks -q test");
 	close(f);
 	return 0;
 }

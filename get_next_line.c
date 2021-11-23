@@ -60,6 +60,7 @@ char	*get_next_line(int fd)
 	len = read(fd, buf, BUFFER_SIZE);
 	while (len > 0)
 	{
+		buf[len] = '\0';
 		tmp = s;
 		s = ft_strjoin(s, buf,len);
 		free(tmp);
@@ -74,10 +75,17 @@ char	*get_next_line(int fd)
 			rest = ft_substr(buf, len);
 			free(buf);
 			return (s);
-		}
+		 }
+		//else{
+		// 	// if (len == BUFFER_SIZE)
+		// 	// {
+		// 	// 	 free(buf);
+		// 	// 	 return (s);
+		// 	// }
+		// }
 		len = read(fd, buf, BUFFER_SIZE);
 	}
 	free(buf);
-	return (NULL);
+	return (s);
 }
 
