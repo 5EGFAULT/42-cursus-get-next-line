@@ -24,7 +24,7 @@ char	*ft_strjoin(char *s1, char const *s2,int len)
 	j = -1;
 	if (!s2)
 		return (0);
-	s = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	s = (char *)malloc(ft_strlen(s1) + len + 1);
 	if (!s)
 		return (0);
 	while (s1 && s1[++j])
@@ -82,10 +82,10 @@ char	*ft_substr(char *s, size_t len)
 	while (s[++start] && s[start] != '\n')
 		;
 	++start;
-	if (s && (size_t)start < ft_strlen(s))
+	if (s && (size_t)start < ft_strlen(s) && (size_t)start < len)
 	{
 		res = (char *)malloc(len + 1);
-		if (!(res))
+		if (!res)
 			return (0);
 		while (s[++i + start] && (size_t) i + start < len)
 			res[i] = s[i + start];

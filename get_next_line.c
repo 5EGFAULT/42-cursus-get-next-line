@@ -49,7 +49,9 @@ char	*get_next_line(int fd)
 	int			len;
 	static char	*rest = NULL;
 
-	s = set_rest_to_str(&rest);
+	s = NULL;
+	if (rest)
+		s = set_rest_to_str(&rest);
 	if (rest)
 		return (s);
 	buf = (char *)malloc(BUFFER_SIZE + 1);
@@ -64,11 +66,13 @@ char	*get_next_line(int fd)
 		if (!s)
 		{
 			free(buf);
+			free(rest);
 			return (NULL);
 		}
 		if (ft_strchr(s, '\n'))
 		{
 			rest = ft_substr(buf, len);
+			free(buf);
 			return (s);
 		}
 		len = read(fd, buf, BUFFER_SIZE);
