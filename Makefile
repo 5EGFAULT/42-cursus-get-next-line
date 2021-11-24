@@ -1,6 +1,7 @@
 
 NAME		:= libgnl.a
-SRC	:= get_next_line_utils.c get_next_line.c
+# SRC	:= get_next_line_utils.c get_next_line.c
+SRC	:= get_next_line_utils_bonus.c get_next_line_bonus.c
 OBJ := $(patsubst %.c, %.o, $(SRC))
 FLAGS		:= -Wall -Wextra -Werror
 .PHONY		:  all clean fclean re

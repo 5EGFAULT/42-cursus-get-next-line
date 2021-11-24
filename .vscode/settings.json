@@ -18,6 +18,9 @@
   "C_Cpp_Runner.warningsAsError": false,
   "files.associations": {
     "*.sass": "sass",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "get_next_line.h": "c",
+    "get_next_line_bonus.h": "c",
+    "limits.h": "c"
   }
 }
