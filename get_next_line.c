@@ -11,22 +11,16 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-/**
-getting reste of previous buffer read
-
-*/
 
 char	*set_rest_to_str(char **rest)
 {
-	char 	*s;
+	char	*s;
 	char	*tmp;
 
 	s = NULL;
 	if (*rest)
 	{
-		s = ft_strjoin(s, *rest,ft_strlen(*rest));
-		
+		s = ft_strjoin(s, *rest, ft_strlen(*rest));
 		tmp = *rest;
 		free(tmp);
 		if (ft_strchr(s, '\n'))
@@ -41,11 +35,33 @@ char	*set_rest_to_str(char **rest)
 	return (s);
 }
 
+int	loop_checks(char *buf, char **rest, char **s, int len)
+{
+	char		*tmp;
+
+	buf[len] = '\0';
+	tmp = *s;
+	*s = ft_strjoin(*s, buf, len);
+	free(tmp);
+	if (!*s)
+	{
+		free(buf);
+		free(*rest);
+		return (1);
+	}
+	if (ft_strchr(*s, '\n'))
+	{
+		*rest = ft_substr(buf, len);
+		free(buf);
+		return (1);
+	}
+	return (0);
+}
+
 char	*get_next_line(int fd)
 {
 	char		*s;
 	char		*buf;
-	char		*tmp;
 	int			len;
 	static char	*rest = NULL;
 
@@ -60,32 +76,10 @@ char	*get_next_line(int fd)
 	len = read(fd, buf, BUFFER_SIZE);
 	while (len > 0)
 	{
-		buf[len] = '\0';
-		tmp = s;
-		s = ft_strjoin(s, buf,len);
-		free(tmp);
-		if (!s)
-		{
-			free(buf);
-			free(rest);
-			return (NULL);
-		}
-		if (ft_strchr(s, '\n'))
-		{
-			rest = ft_substr(buf, len);
-			free(buf);
+		if (loop_checks(buf, &rest, &s, len))
 			return (s);
-		 }
-		//else{
-		// 	// if (len == BUFFER_SIZE)
-		// 	// {
-		// 	// 	 free(buf);
-		// 	// 	 return (s);
-		// 	// }
-		// }
 		len = read(fd, buf, BUFFER_SIZE);
 	}
 	free(buf);
 	return (s);
 }
-

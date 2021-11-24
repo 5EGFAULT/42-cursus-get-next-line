@@ -11,10 +11,16 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdlib.h>
-#include <stdio.h>
 
-char	*ft_strjoin(char *s1, char const *s2,int len)
+void	ft_strjoinsmallpart(int *j, char *s, char *s1)
+{
+	while (s1 && s1[++(*j)])
+		s[(*j)] = s1[(*j)];
+	if (!s1)
+		(*j)++;
+}
+
+char	*ft_strjoin(char *s1, char const *s2, int len)
 {
 	char	*s;
 	int		i;
@@ -27,22 +33,17 @@ char	*ft_strjoin(char *s1, char const *s2,int len)
 	s = (char *)malloc(ft_strlen(s1) + len + 1);
 	if (!s)
 		return (0);
-	while (s1 && s1[++j])
-		s[j] = s1[j];
-	if (!s1)
-		j++;
-	while (s2[++i]  && len > i)
+	ft_strjoinsmallpart(&j, s, s1);
+	while (s2[++i] && len > i)
 	{
 		s[i + j] = s2[i];
-		if(s2[i] == '\n')
+		if (s2[i] == '\n')
 		{
 			i++;
 			break ;
 		}
 	}
 	s[i + j] = '\0';
-	// printf("{%s}",s);
-	// printf("{{%s}}",s2);
 	return (s);
 }
 
@@ -55,6 +56,7 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
+
 char	*ft_strchr(const char *s, int c)
 {
 	int	i;
