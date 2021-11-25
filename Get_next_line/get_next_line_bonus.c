@@ -22,7 +22,6 @@ char	*set_rest_to_str(char **rest)
 	{
 		s = ft_strjoin(s, *rest, ft_strlen(*rest));
 		tmp = *rest;
-		free(tmp);
 		if (ft_strchr(s, '\n'))
 		{
 			*rest = ft_substr(*rest, BUFFER_SIZE);
@@ -31,6 +30,7 @@ char	*set_rest_to_str(char **rest)
 		{
 			*rest = NULL;
 		}
+		free(tmp);
 	}
 	return (s);
 }
