@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asouinia <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/21 14:29:20 by asouinia          #+#    #+#             */
-/*   Updated: 2021/11/21 14:29:21 by asouinia         ###   ########.fr       */
+/*   Created: 2021/11/24 22:44:57 by asouinia          #+#    #+#             */
+/*   Updated: 2021/11/24 22:44:59 by asouinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*set_rest_to_str(char **rest)
 {
@@ -63,22 +63,22 @@ char	*get_next_line(int fd)
 	char		*s;
 	char		*buf;
 	int			len;
-	static char	*rest = NULL;
+	static char	*rest[OPEN_MAX] = {};
 
 	s = NULL;
-	if (rest)
-		s = set_rest_to_str(&rest);
-	if (rest)
+	if (fd > -1 && rest[fd])
+		s = set_rest_to_str(&rest[fd]);
+	if (fd > -1 && rest[fd])
 		return (s);
 	buf = (char *)malloc(BUFFER_SIZE + 1);
 	if (buf == NULL)
 		return (NULL);
-	len = read(fd, buf, BUFFER_SIZE);
+	len = 1;
 	while (len > 0)
 	{
-		if (loop_checks(buf, &rest, &s, len))
-			return (s);
 		len = read(fd, buf, BUFFER_SIZE);
+		if (len > 0 && loop_checks(buf, &rest[fd], &s, len))
+			return (s);
 	}
 	free(buf);
 	return (s);
