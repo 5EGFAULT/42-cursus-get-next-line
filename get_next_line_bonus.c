@@ -6,7 +6,7 @@
 /*   By: asouinia <asouinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 14:29:20 by asouinia          #+#    #+#             */
-/*   Updated: 2022/06/02 16:01:57 by asouinia         ###   ########.fr       */
+/*   Updated: 2022/06/02 17:08:20 by asouinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ char	*get_next_line(int fd)
 {
 	char		*line;
 	char		*buff;
-	static char	*save[OPEN_MAX];
+	static char	*save[1024];
 
-	if (fd < 0)
+	if (fd < 0 || fd > 1023 || BUFFER_SIZE < 1)
 		return (NULL);
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
