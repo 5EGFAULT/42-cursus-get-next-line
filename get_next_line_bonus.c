@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asouinia <asouinia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 14:29:20 by asouinia          #+#    #+#             */
-/*   Updated: 2022/06/02 15:56:25 by asouinia         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:01:57 by asouinia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "get_next_line_bonus.h"
 
 char	*get_saved(char **save)
 {
@@ -55,16 +54,16 @@ char	*get_next_line(int fd)
 {
 	char		*line;
 	char		*buff;
-	static char	*save;
+	static char	*save[OPEN_MAX];
 
 	if (fd < 0)
 		return (NULL);
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
-	line = get_saved(&save);
+	line = get_saved(save + fd);
 	if (ft_strchr(line))
 		return (free(buff), line);
-	line = get_line(&save, buff, line, fd);
+	line = get_line(save + fd, buff, line, fd);
 	return (free(buff), line);
 }
